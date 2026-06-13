@@ -223,95 +223,118 @@ const Doctors = ({ onSelectDoctor }) => {
         }
 
         .doctor-card {
-          padding: 24px;
+          padding: 28px 24px;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 20px;
-          border: 1px solid var(--border-light);
-          transition: all var(--transition-normal);
+          gap: 18px;
+          border: 1px solid #DCE7F1;
+          border-radius: 16px;
+          background: linear-gradient(180deg, #ffffff 0%, #fcfeff 100%);
+          box-shadow: 0 12px 30px rgba(44, 73, 100, 0.08);
+          transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+          min-height: 100%;
+          height: 100%;
+          justify-content: space-between;
         }
 
         .doctor-card:hover {
-          transform: translateY(-4px);
-          border-color: rgba(25, 119, 204, 0.2);
-          box-shadow: 0 12px 30px rgba(44, 73, 100, 0.1);
+          transform: translateY(-8px);
+          border-color: #1977CC;
+          box-shadow: 0 18px 40px rgba(25, 119, 204, 0.15);
         }
 
         .doctor-avatar-wrapper {
           position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          padding-bottom: 4px;
         }
 
         .doctor-avatar {
-          width: 90px;
-          height: 90px;
+          width: 96px;
+          height: 96px;
           border-radius: 50%;
-          background: linear-gradient(135deg, rgba(25, 119, 204, 0.1), rgba(63, 187, 192, 0.12));
-          border: 2px solid var(--border-light);
+          background: linear-gradient(135deg, rgba(25, 119, 204, 0.14), rgba(63, 187, 192, 0.16));
+          border: 1px solid rgba(25, 119, 204, 0.14);
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--primary);
-          transition: all var(--transition-normal);
+          transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
         .doctor-card:hover .doctor-avatar {
-          border-color: var(--primary);
           transform: scale(1.05);
+          border-color: #1977CC;
+          box-shadow: 0 10px 24px rgba(25, 119, 204, 0.12);
         }
 
         .doctor-active-badge {
-          position: absolute;
-          bottom: -4px;
-          left: 50%;
-          transform: translateX(-50%);
+          position: static;
+          transform: none;
           background: rgba(40, 167, 69, 0.12);
           border: 1px solid rgba(40, 167, 69, 0.2);
           color: var(--success);
-          font-size: 0.75rem;
-          font-weight: 600;
-          padding: 2px 10px;
-          border-radius: 50px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          padding: 6px 12px;
+          border-radius: 999px;
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 5px;
           white-space: nowrap;
         }
 
         .doctor-info {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 10px;
           width: 100%;
+          align-items: center;
+          flex: 1;
         }
 
         .doctor-name {
-          font-size: 1.25rem;
+          font-size: 1.28rem;
           font-weight: 700;
+          color: #2C4964;
+          margin: 0;
+          line-height: 1.25;
         }
 
         .doctor-specialty {
-          color: var(--secondary);
-          font-weight: 600;
-          font-size: 0.95rem;
+          color: #1977CC;
+          font-weight: 700;
+          font-size: 0.98rem;
           font-family: var(--font-title);
+          letter-spacing: 0.01em;
+        }
+
+        .doctor-card:hover .doctor-specialty {
+          color: #135a9a;
         }
 
         .doctor-schedule {
           display: flex;
           flex-direction: column;
-          gap: 6px;
-          margin-top: 8px;
-          text-align: left;
+          gap: 8px;
+          margin-top: 6px;
+          text-align: center;
           border-top: 1px solid rgba(44, 73, 100, 0.08);
           padding-top: 12px;
+          width: 100%;
+          align-items: center;
         }
 
         .schedule-label {
           font-size: 0.8rem;
           color: var(--text-muted);
-          font-weight: 500;
+          font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -319,21 +342,36 @@ const Doctors = ({ onSelectDoctor }) => {
         .schedule-days {
           display: flex;
           flex-wrap: wrap;
-          gap: 4px;
+          justify-content: center;
+          gap: 6px;
         }
 
         .day-badge {
-          background: #f8fbfe;
-          border: 1px solid var(--border-light);
-          padding: 2px 8px;
-          border-radius: 4px;
+          background: #F5FAFF;
+          border: 1px solid #DCE7F1;
+          padding: 6px 10px;
+          border-radius: 999px;
           font-size: 0.8rem;
-          color: var(--text-secondary);
+          color: #47637A;
+          font-weight: 600;
         }
 
         .book-btn {
-          width: 100%;
+          width: auto;
+          min-width: 168px;
           margin-top: auto;
+          padding: 10px 16px;
+          border-radius: 999px;
+          font-weight: 600;
+          box-shadow: none;
+          transition: background-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+        }
+
+        .doctor-card:hover .book-btn {
+          background: #1977CC;
+          color: #ffffff;
+          transform: translateY(-1px);
+          box-shadow: 0 8px 18px rgba(25, 119, 204, 0.18);
         }
 
         .no-results {

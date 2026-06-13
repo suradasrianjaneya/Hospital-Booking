@@ -7,9 +7,9 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
   const navItems = [
     { id: 'home', label: 'Home', icon: HomeIcon },
     { id: 'doctors', label: 'Doctors', icon: User },
-    { id: 'appointment', label: 'Book Appointment', icon: Calendar },
     { id: 'contact', label: 'Contact', icon: Phone },
     { id: 'admin', label: 'Admin Portal', icon: LayoutDashboard },
+    { id: 'appointment', label: 'Book Appointment', icon: Calendar },
   ];
 
   const handleNavClick = (pageId) => {

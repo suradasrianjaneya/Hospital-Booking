@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server:dev\" \"vite\"", 
     "server": "node server.js",
     "server:dev": "nodemon server.js",
     "dev:all": "concurrently \"npm run server:dev\" \"npm run dev\"",
