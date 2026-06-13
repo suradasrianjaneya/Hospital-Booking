@@ -25,9 +25,9 @@ function App() {
         return <Doctors onSelectDoctor={handleSelectDoctor} />;
       case 'appointment':
         return (
-          <Appointment 
-            preselectedDoctorId={selectedDoctorId} 
-            clearPreselectedDoctor={() => setSelectedDoctorId(null)} 
+          <Appointment
+            preselectedDoctorId={selectedDoctorId}
+            clearPreselectedDoctor={() => setSelectedDoctorId(null)}
           />
         );
       case 'contact':
@@ -41,15 +41,12 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Navigation Header */}
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
-      {/* Main Page Viewport */}
       <main className="main-content">
         {renderPageContent()}
       </main>
 
-      {/* Structured Footer */}
       <footer className="footer-panel">
         <div className="footer-content">
           <div className="footer-brand">
@@ -71,15 +68,15 @@ function App() {
 
         <style>{`
           .footer-panel {
-            background: rgba(8, 12, 20, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: #f1f7fd;
+            border-top: 1px solid var(--border-light);
             padding: 30px 24px;
             margin-top: 60px;
             z-index: 10;
           }
 
           .footer-content {
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -94,32 +91,32 @@ function App() {
             gap: 8px;
             font-family: var(--font-title);
             font-weight: 700;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
+            color: var(--text-primary);
           }
 
           .logo-glow-footer {
-            background: rgba(0, 210, 255, 0.1);
+            background: rgba(25, 119, 204, 0.09);
             color: var(--primary);
             padding: 6px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0, 210, 255, 0.2);
+            border: 1px solid rgba(25, 119, 204, 0.14);
           }
 
           .accent-text {
-            background: linear-gradient(135deg, #00d2ff, #00f5d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
           }
 
           .footer-info-row {
             display: flex;
             gap: 20px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
+            flex-wrap: wrap;
+            justify-content: center;
           }
 
           .footer-info-row span {
@@ -129,12 +126,12 @@ function App() {
           }
 
           .footer-copyright {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid rgba(44, 73, 100, 0.1);
             padding-top: 16px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
           }
 
           .heart-icon {
@@ -146,7 +143,7 @@ function App() {
 
           @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.25); }
+            50% { transform: scale(1.14); }
           }
         `}</style>
       </footer>

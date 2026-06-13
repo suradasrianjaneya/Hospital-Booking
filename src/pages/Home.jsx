@@ -1,5 +1,4 @@
-import Threads from '../components/Threads';
-import { Heart, Brain, Baby, Activity, Stethoscope, ChevronRight, ShieldAlert, Award, Clock } from 'lucide-react';
+import { Heart, Brain, Baby, Activity, Stethoscope, ChevronRight, ShieldCheck, Award, Clock } from 'lucide-react';
 
 const Home = ({ setCurrentPage }) => {
   const services = [
@@ -7,55 +6,44 @@ const Home = ({ setCurrentPage }) => {
       icon: Heart,
       title: 'Cardiology',
       desc: 'Comprehensive cardiac screenings, heart failure management, and advanced cardiovascular diagnostics.',
-      color: '#ff4b5c'
+      color: '#1977cc'
     },
     {
       icon: Brain,
       title: 'Neurology',
       desc: 'Expert care for neurological disorders, nerve function testing, and stroke prevention treatments.',
-      color: '#a78bfa'
+      color: '#3fbbc0'
     },
     {
       icon: Baby,
       title: 'Pediatrics',
       desc: 'Nurturing healthcare for children, immunization clinics, and pediatric milestone monitoring.',
-      color: '#34d399'
+      color: '#28a745'
     },
     {
       icon: Activity,
       title: 'Orthopedics',
       desc: 'Joint replacement, trauma care, sports medicine, and targeted rehabilitative therapies.',
-      color: '#fbbf24'
+      color: '#1977cc'
     },
     {
       icon: Stethoscope,
       title: 'General Medicine',
       desc: 'Routine wellness physicals, diagnostic medicine, chronic illness management, and preventative health.',
-      color: '#00d2ff'
+      color: '#3fbbc0'
     }
   ];
 
   return (
     <div className="home-container fade-in">
-      {/* Threads Hero Banner Section */}
       <section className="hero-section glass-panel">
-        <div className="threads-background-wrapper">
-          <Threads
-            color={[0.0, 0.82, 1.0]} // Vibrant medical cyan: RGB scaled 0-1
-            amplitude={1.2}
-            distance={0.15}
-            enableMouseInteraction={true}
-          />
-        </div>
-        <div className="hero-overlay"></div>
         <div className="hero-content">
-          <span className="hero-tag">Welcome to MedThreads</span>
+          <span className="section-tag">Welcome to MedThreads</span>
           <h1 className="hero-title">
-            Next-Gen Medical Care <br />
-            <span className="text-gradient">Woven with Excellence</span>
+            Compassionate care for every step of your health journey.
           </h1>
           <p className="hero-description">
-            Combining state-of-the-art medical technology with empathetic patient care. Experience a hospital environment designed around your recovery and wellness.
+            From preventive screenings to specialized treatment, our medical team delivers trusted, patient-first care in a calm and welcoming environment.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={() => setCurrentPage('appointment')}>
@@ -65,33 +53,73 @@ const Home = ({ setCurrentPage }) => {
               Meet Doctors
             </button>
           </div>
+
+          <div className="hero-stats">
+            <div>
+              <strong>500+</strong>
+              <span>Appointments</span>
+            </div>
+            <div>
+              <strong>50+</strong>
+              <span>Doctors</span>
+            </div>
+            <div>
+              <strong>10+</strong>
+              <span>Departments</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-visual" aria-hidden="true">
+          <div className="hero-card hero-card-main">
+            <div className="hero-avatar">
+              <Stethoscope size={40} />
+            </div>
+            <div>
+              <h3>Expert Medical Team</h3>
+              <p>Board-certified specialists and coordinated care plans.</p>
+            </div>
+          </div>
+          <div className="hero-card hero-card-small">
+            <div className="mini-icon"><ShieldCheck size={18} /></div>
+            <div>
+              <strong>Same-Day Care</strong>
+              <span>Fast access and comfort-focused support.</span>
+            </div>
+          </div>
+          <div className="hero-card hero-card-small alt">
+            <div className="mini-icon"><Activity size={18} /></div>
+            <div>
+              <strong>Modern Diagnostics</strong>
+              <span>Precision imaging and accurate results.</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Overview Cards Section */}
       <section className="stats-section grid-3">
         <div className="stat-card glass-panel">
-          <Award className="stat-icon" size={32} />
-          <h3>A+ Certified Care</h3>
-          <p>Recognized nationally for excellence in hygiene, patient-safety protocols, and overall clinical outcomes.</p>
+          <Award className="stat-icon" size={28} />
+          <h3>Award-Winning Care</h3>
+          <p>Recognized for patient safety, clinical excellence, and a premium care experience.</p>
         </div>
         <div className="stat-card glass-panel">
-          <Clock className="stat-icon" size={32} />
-          <h3>24/7 Consultation</h3>
-          <p>Round-the-clock emergency room staffing and immediate access to primary physicians when you need it most.</p>
+          <Clock className="stat-icon" size={28} />
+          <h3>Flexible Scheduling</h3>
+          <p>Convenient appointment windows with responsive support and follow-up planning.</p>
         </div>
         <div className="stat-card glass-panel">
-          <ShieldAlert className="stat-icon" size={32} />
-          <h3>Secured Records</h3>
-          <p>Fully compliant, encrypted digital health repository ensuring your medical history remains private and accessible.</p>
+          <ShieldCheck className="stat-icon" size={28} />
+          <h3>Secure Records</h3>
+          <p>Protected, organized patient information designed for smooth and reliable care.</p>
         </div>
       </section>
 
-      {/* Services Grid Section */}
       <section className="services-section">
         <div className="section-header text-center">
-          <h2 className="section-title">Our Medical <span className="text-gradient">Specialties</span></h2>
-          <p className="subtitle mx-auto">Explore our range of comprehensive medical departments staffed by certified, world-class medical professionals.</p>
+          <span className="section-tag">Departments</span>
+          <h2 className="section-title">Meet Our <span className="text-gradient">Specialties</span></h2>
+          <p className="subtitle mx-auto">Explore comprehensive services backed by experienced clinicians and modern treatment protocols.</p>
         </div>
 
         <div className="grid-3 services-grid">
@@ -104,7 +132,7 @@ const Home = ({ setCurrentPage }) => {
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
-                <button 
+                <button
                   className="service-link"
                   onClick={() => setCurrentPage('appointment')}
                 >
@@ -120,112 +148,160 @@ const Home = ({ setCurrentPage }) => {
         .home-container {
           display: flex;
           flex-direction: column;
-          gap: 60px;
+          gap: 48px;
         }
 
         .hero-section {
-          position: relative;
-          height: 520px;
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          display: flex;
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 32px;
           align-items: center;
-          padding: 0 60px;
-          border: 1px solid rgba(0, 210, 255, 0.15);
-        }
-
-        .threads-background-wrapper {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 1;
-        }
-
-        .hero-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to right, rgba(8, 12, 20, 0.95) 40%, rgba(8, 12, 20, 0.4) 100%);
-          z-index: 2;
+          padding: 48px;
+          border-radius: var(--radius-lg);
+          background: linear-gradient(135deg, #ffffff 0%, #f1f7fd 100%);
         }
 
         .hero-content {
-          position: relative;
-          z-index: 3;
-          max-width: 600px;
-        }
-
-        .hero-tag {
-          font-family: var(--font-title);
-          font-size: 0.85rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          color: var(--secondary);
-          background: rgba(0, 245, 212, 0.1);
-          padding: 6px 14px;
-          border-radius: 50px;
-          border: 1px solid rgba(0, 245, 212, 0.2);
-          display: inline-block;
-          margin-bottom: 20px;
+          max-width: 620px;
         }
 
         .hero-title {
-          font-size: 3rem;
-          line-height: 1.15;
-          margin-bottom: 20px;
+          font-size: clamp(2rem, 3.4vw, 3rem);
+          margin-bottom: 16px;
+          max-width: 590px;
         }
 
         .hero-description {
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           color: var(--text-secondary);
-          margin-bottom: 30px;
-          line-height: 1.6;
+          margin-bottom: 24px;
+          line-height: 1.7;
         }
 
         .hero-actions {
           display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-bottom: 24px;
+        }
+
+        .hero-stats {
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .hero-stats > div {
+          display: flex;
+          flex-direction: column;
+          min-width: 110px;
+          padding: 12px 14px;
+          border: 1px solid var(--border-light);
+          border-radius: var(--radius-sm);
+          background: rgba(255, 255, 255, 0.82);
+        }
+
+        .hero-stats strong {
+          font-size: 1.2rem;
+          color: var(--primary);
+        }
+
+        .hero-stats span {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+
+        .hero-visual {
+          display: flex;
+          flex-direction: column;
           gap: 16px;
         }
 
-        .stats-section {
-          margin-top: -20px;
+        .hero-card {
+          background: #ffffff;
+          border: 1px solid var(--border-light);
+          border-radius: var(--radius-md);
+          padding: 20px;
+          box-shadow: var(--shadow-soft);
+        }
+
+        .hero-card-main {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .hero-avatar {
+          width: 56px;
+          height: 56px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(25, 119, 204, 0.12);
+          color: var(--primary);
+        }
+
+        .hero-card h3 {
+          font-size: 1.05rem;
+          margin-bottom: 4px;
+        }
+
+        .hero-card p,
+        .hero-card span {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+
+        .hero-card-small {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .hero-card-small.alt {
+          margin-left: 24px;
+        }
+
+        .mini-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(63, 187, 192, 0.12);
+          color: var(--secondary);
         }
 
         .stat-card {
-          padding: 30px;
+          padding: 28px;
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          border-left: 4px solid var(--primary);
+          gap: 10px;
+          border-left: 3px solid var(--primary);
         }
 
         .stat-icon {
           color: var(--primary);
-          filter: drop-shadow(0 0 8px var(--primary-glow));
         }
 
         .stat-card h3 {
-          font-size: 1.25rem;
+          font-size: 1.1rem;
         }
 
         .stat-card p {
           font-size: 0.95rem;
           color: var(--text-secondary);
-          line-height: 1.5;
         }
 
         .section-header {
-          margin-bottom: 40px;
+          margin-bottom: 30px;
         }
 
         .section-title {
-          font-size: 2.25rem;
-          margin-bottom: 12px;
+          font-size: 2rem;
+          margin-bottom: 10px;
         }
 
         .mx-auto {
@@ -233,59 +309,51 @@ const Home = ({ setCurrentPage }) => {
           margin-right: auto;
         }
 
-        .services-grid {
-          margin-bottom: 20px;
-        }
-
         .service-card {
-          padding: 35px;
+          padding: 28px;
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          transition: all 0.3s ease;
+          gap: 14px;
+          transition: transform var(--transition-normal), box-shadow var(--transition-normal);
         }
 
         .service-card:hover {
           transform: translateY(-5px);
-          border-color: rgba(0, 210, 255, 0.3);
-          box-shadow: 0 12px 30px rgba(0, 210, 255, 0.08);
+          box-shadow: 0 16px 34px rgba(44, 73, 100, 0.1);
         }
 
         .service-icon-wrapper {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(25, 119, 204, 0.08);
           width: 50px;
           height: 50px;
           border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.3s ease;
+          transition: background var(--transition-fast);
         }
 
         .service-card:hover .service-icon-wrapper {
           background: var(--icon-color);
-          border-color: var(--icon-color);
-          box-shadow: 0 0 15px var(--icon-color);
         }
 
         .service-icon {
           color: var(--icon-color);
-          transition: all 0.3s ease;
+          transition: color var(--transition-fast);
         }
 
         .service-card:hover .service-icon {
-          color: #030712;
+          color: #ffffff;
         }
 
         .service-card h3 {
-          font-size: 1.35rem;
+          font-size: 1.15rem;
         }
 
         .service-card p {
           font-size: 0.95rem;
           color: var(--text-secondary);
-          line-height: 1.6;
+          line-height: 1.65;
           flex-grow: 1;
         }
 
@@ -300,22 +368,20 @@ const Home = ({ setCurrentPage }) => {
           cursor: pointer;
           padding: 0;
           width: fit-content;
-          transition: gap 0.2s ease;
         }
 
-        .service-card:hover .service-link {
+        .service-link:hover {
           gap: 10px;
-          text-decoration: underline;
         }
 
         @media (max-width: 900px) {
           .hero-section {
-            padding: 40px;
-            height: auto;
-            min-height: 450px;
+            grid-template-columns: 1fr;
+            padding: 32px;
           }
-          .hero-title {
-            font-size: 2.25rem;
+
+          .hero-visual {
+            max-width: 480px;
           }
         }
 
@@ -324,8 +390,13 @@ const Home = ({ setCurrentPage }) => {
             flex-direction: column;
             gap: 12px;
           }
+
           .btn {
             width: 100%;
+          }
+
+          .hero-card-small.alt {
+            margin-left: 0;
           }
         }
       `}</style>
