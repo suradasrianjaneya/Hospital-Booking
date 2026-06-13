@@ -450,12 +450,6 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           gap: 20px 24px;
         }
 
-        /* Adjust columns for wide form inputs */
-        .form-grid .form-group:nth-child(1),
-        .form-grid .form-group:nth-child(4) {
-          grid-column: span 1;
-        }
-
         .form-label {
           display: flex;
           align-items: center;
@@ -486,9 +480,9 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .alert-danger {
-          background: rgba(239, 68, 68, 0.15);
-          border: 1px solid rgba(239, 68, 68, 0.25);
-          color: #f87171;
+          background: rgba(220, 53, 69, 0.09);
+          border: 1px solid rgba(220, 53, 69, 0.16);
+          color: var(--danger);
         }
 
         .slot-grid {
@@ -499,8 +493,8 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .slot-pill {
-          border: 1px solid rgba(0, 210, 255, 0.2);
-          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-light);
+          background: #ffffff;
           color: var(--text-primary);
           border-radius: 999px;
           padding: 10px 12px;
@@ -512,12 +506,12 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         .slot-pill:hover:not(:disabled) {
           transform: translateY(-1px);
           border-color: var(--primary);
-          box-shadow: 0 8px 20px rgba(0, 210, 255, 0.12);
+          box-shadow: 0 8px 20px rgba(25, 119, 204, 0.12);
         }
 
         .slot-pill.active {
-          background: linear-gradient(135deg, var(--primary), var(--secondary));
-          color: #03111d;
+          background: var(--primary);
+          color: #ffffff;
           border-color: transparent;
         }
 
@@ -533,13 +527,13 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           font-size: 0.9rem;
         }
 
-        /* Schedule Panel Styles */
         .schedule-panel {
           padding: 35px;
           display: flex;
           flex-direction: column;
           gap: 20px;
           height: fit-content;
+          background: linear-gradient(135deg, #ffffff, #f4f9fd);
         }
 
         .panel-desc {
@@ -548,7 +542,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .selected-doctor-info {
-          background: rgba(255, 255, 255, 0.02);
+          background: #ffffff;
           border: 1px solid var(--border-light);
           border-radius: var(--radius-md);
           padding: 20px;
@@ -561,7 +555,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: rgba(0, 210, 255, 0.1);
+          background: rgba(25, 119, 204, 0.09);
           color: var(--primary);
           display: flex;
           align-items: center;
@@ -580,7 +574,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .advisor-schedule-box {
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(44, 73, 100, 0.08);
           padding-top: 12px;
           display: flex;
           flex-direction: column;
@@ -610,7 +604,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .advisory-notes {
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(44, 73, 100, 0.08);
           padding-top: 20px;
           display: flex;
           flex-direction: column;
@@ -634,14 +628,13 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           color: var(--text-secondary);
         }
 
-        /* Success Modal Styles */
         .modal-backdrop {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(3, 7, 18, 0.85);
+          background: rgba(12, 26, 39, 0.65);
           backdrop-filter: blur(8px);
           z-index: 2000;
           display: flex;
@@ -655,13 +648,13 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           width: 100%;
           padding: 40px;
           text-align: center;
-          border: 1px solid rgba(16, 185, 129, 0.3);
-          box-shadow: 0 20px 50px rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(40, 167, 69, 0.2);
+          box-shadow: 0 20px 52px rgba(25, 119, 204, 0.1);
         }
 
         .check-icon-wrapper {
           color: var(--success);
-          background: rgba(16, 185, 129, 0.1);
+          background: rgba(40, 167, 69, 0.12);
           width: 80px;
           height: 80px;
           border-radius: 50%;
@@ -669,7 +662,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           align-items: center;
           justify-content: center;
           margin: 0 auto 20px;
-          border: 2px solid rgba(16, 185, 129, 0.25);
+          border: 2px solid rgba(40, 167, 69, 0.2);
         }
 
         .success-modal h2 {
@@ -684,7 +677,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         }
 
         .booking-summary-card {
-          background: rgba(8, 12, 20, 0.4);
+          background: #f8fbfe;
           border: 1px solid var(--border-light);
           border-radius: var(--radius-md);
           padding: 20px;
@@ -698,7 +691,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         .summary-row {
           display: flex;
           justify-content: space-between;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          border-bottom: 1px solid rgba(44, 73, 100, 0.06);
           padding-bottom: 8px;
         }
 

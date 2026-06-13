@@ -190,7 +190,7 @@ const Contact = () => {
 
         .contact-layout {
           display: grid;
-          grid-template-columns: 2fr 3fr;
+          grid-template-columns: 1.05fr 1.35fr;
           gap: 32px;
         }
 
@@ -205,12 +205,13 @@ const Contact = () => {
           display: flex;
           align-items: center;
           gap: 20px;
+          background: linear-gradient(135deg, #ffffff, #f4f9fd);
         }
 
         .icon-wrapper {
           width: 48px;
           height: 48px;
-          background: rgba(0, 210, 255, 0.1);
+          background: rgba(25, 119, 204, 0.09);
           border: 1px solid var(--border-light);
           border-radius: 12px;
           display: flex;
@@ -221,9 +222,9 @@ const Contact = () => {
         }
 
         .info-card:hover .icon-wrapper {
-          color: #030712;
-          background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-          box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+          color: #ffffff;
+          background: var(--primary);
+          box-shadow: 0 10px 20px rgba(25, 119, 204, 0.14);
         }
 
         .info-text h4 {
@@ -240,6 +241,7 @@ const Contact = () => {
 
         .form-card {
           padding: 40px;
+          background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
         }
 
         .contact-form {
@@ -276,15 +278,15 @@ const Contact = () => {
 
         .check-glow {
           color: var(--success);
-          background: rgba(16, 185, 129, 0.15);
+          background: rgba(40, 167, 69, 0.12);
           width: 80px;
           height: 80px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 2px solid rgba(16, 185, 129, 0.3);
-          box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+          border: 2px solid rgba(40, 167, 69, 0.2);
+          box-shadow: 0 10px 24px rgba(40, 167, 69, 0.1);
         }
 
         .feedback-submitted h3 {
