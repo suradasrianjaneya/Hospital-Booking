@@ -44,8 +44,8 @@ const Contact = () => {
             </div>
             <div className="info-text">
               <h4>Hospital Address</h4>
-              <p>100 Medical Center Plaza</p>
-              <p>Suite 400, Cityville, CV 12345</p>
+              <p>12, MG Road</p>
+              <p>Bengaluru, Karnataka 560001</p>
             </div>
           </div>
 
@@ -55,8 +55,8 @@ const Contact = () => {
             </div>
             <div className="info-text">
               <h4>Phone Contacts</h4>
-              <p>Primary: +1 (555) 123-4567</p>
-              <p>Emergency Line: +1 (555) 911-0000</p>
+              <p>Primary: +91 98765 43210</p>
+              <p>Emergency Line: +91 91100 00000</p>
             </div>
           </div>
 
@@ -66,8 +66,8 @@ const Contact = () => {
             </div>
             <div className="info-text">
               <h4>Email Communications</h4>
-              <p>General: info@medthreadshospital.com</p>
-              <p>Admissions: care@medthreadshospital.com</p>
+              <p>General: care@medthreadsindia.in</p>
+              <p>Admissions: admissions@medthreadsindia.in</p>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ const Contact = () => {
                   id="name"
                   name="name"
                   className="form-control"
-                  placeholder="Jane Smith"
+                  placeholder="Aarav Sharma"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -125,7 +125,7 @@ const Contact = () => {
                   id="email"
                   name="email"
                   className="form-control"
-                  placeholder="janesmith@example.com"
+                  placeholder="aarav.sharma@email.com"
                   value={formData.email}
                   onChange={handleChange}
                   required

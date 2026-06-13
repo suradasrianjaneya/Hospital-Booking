@@ -182,3 +182,68 @@
     border-right-color: var(--border);
   }
 }
+
+ /* Hero  */
+.hero-section {
+  min-height: 92vh;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  min-height: 92vh;
+  background: rgba(255, 255, 255, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #2c4964;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: #444;
+  margin-top: 20px;
+}
+
+.hero-floating-cards {
+  max-width: 1200px;
+  margin: -40px auto 0;
+  padding: 0 24px 60px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 24px;
+}
+
+.hero-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.85);
+  border-radius: 12px;
+}
+
+.hero-card-main {
+  background: #1977cc;
+  color: white;
+}

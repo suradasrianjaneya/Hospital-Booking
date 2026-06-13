@@ -53,16 +53,16 @@ function App() {
             <div className="logo-glow-footer">
               <Activity size={18} />
             </div>
-            <span>Med<span className="accent-text">Threads</span> Hospital</span>
+            <span>Med<span className="accent-text">Threads</span> India Hospital</span>
           </div>
 
           <div className="footer-info-row">
-            <span><Phone size={12} /> +1 (555) 123-4567</span>
-            <span><Mail size={12} /> info@medthreadshospital.com</span>
+            <span><Phone size={12} /> +91 98765 43210</span>
+            <span><Mail size={12} /> care@medthreadsindia.in</span>
           </div>
 
           <div className="footer-copyright">
-            <p>Made with <Heart size={10} className="heart-icon" /> &copy; 2026 MedThreads Care Network. All rights reserved.</p>
+            <p>Made with <Heart size={10} className="heart-icon" /> &copy; 2026 MedThreads India Care Network. All rights reserved.</p>
           </div>
         </div>
 

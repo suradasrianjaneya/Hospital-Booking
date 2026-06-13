@@ -3,6 +3,17 @@ import { Calendar, User, Phone, Mail, FileText, CheckCircle, ArrowRight, Loader,
 
 const DEFAULT_SLOTS = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM'];
 
+const parseApiResponse = async (response) => {
+  const text = await response.text();
+  if (!text) return null;
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+};
+
 const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
@@ -74,19 +85,20 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         setSelectedSlot('');
 
         const res = await fetch(`/api/doctors/${doctorId}/available-slots?date=${encodeURIComponent(formData.appointment_date)}`);
-        const data = await res.json();
+        const data = await parseApiResponse(res);
 
         if (!res.ok) {
-          throw new Error(data.error || 'Unable to load available time slots.');
+          throw new Error(data?.error || 'Unable to load available time slots.');
         }
 
-        setAvailableSlots(data.availableSlots || []);
-        if ((data.availableSlots || []).length === 0) {
+        const slots = Array.isArray(data?.availableSlots) ? data.availableSlots : DEFAULT_SLOTS;
+        setAvailableSlots(slots);
+        if (slots.length === 0) {
           setSlotMessage('No time slots remain for this doctor on the selected date.');
         }
       } catch (err) {
-        setAvailableSlots([]);
-        setSlotMessage(err.message);
+        setAvailableSlots(DEFAULT_SLOTS);
+        setSlotMessage(err.message || 'Using the standard time slots while the booking service is unavailable.');
       } finally {
         setLoadingSlots(false);
       }
@@ -134,10 +146,10 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         })
       });
 
-      const data = await res.json();
+      const data = await parseApiResponse(res);
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit appointment booking.');
+        throw new Error(data?.error || 'Failed to submit appointment booking.');
       }
 
       // Show success modal/screen
