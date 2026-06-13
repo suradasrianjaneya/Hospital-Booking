@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { 
-  Users, Calendar, LogIn, LogOut, Plus, Trash2, Edit, Save, X, 
-  LayoutDashboard, UserCheck, Stethoscope, Mail, Phone, Clock, FileText 
+import {
+  Calendar, LogIn, LogOut, Plus, Trash2, Edit, Save, X,
+  LayoutDashboard, Stethoscope, Mail, Phone, Clock
 } from 'lucide-react';
 
 const Admin = () => {
@@ -400,40 +400,34 @@ const Admin = () => {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Patient Details</th>
-                  <th>Consulting Doctor</th>
-                  <th>Scheduled Date</th>
-                  <th>Message / Problem</th>
+                  <th>Patient Name</th>
+                  <th>Doctor Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Phone</th>
+                  <th>Email</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {appointments.map(app => (
+                {[...appointments].sort((a, b) => {
+                  const dateCompare = new Date(a.appointment_date) - new Date(b.appointment_date);
+                  if (dateCompare !== 0) return dateCompare;
+                  return (a.appointment_time || '').localeCompare(b.appointment_time || '');
+                }).map(app => (
                   <tr key={app.id}>
                     <td>#{app.id}</td>
-                    <td>
-                      <div className="patient-details">
-                        <span className="patient-name">{app.patient_name}</span>
-                        <span className="patient-contact"><Phone size={10} /> {app.phone}</span>
-                        <span className="patient-contact"><Mail size={10} /> {app.email}</span>
-                      </div>
-                    </td>
+                    <td className="bold-cell">{app.patient_name}</td>
                     <td>
                       <div className="doctor-details">
                         <span className="doc-name">{app.doctor_name}</span>
                         <span className="doc-spec">{app.doctor_specialization}</span>
                       </div>
                     </td>
-                    <td className="bold-cell">
-                      <div className="date-badge-admin">
-                        <Clock size={12} /> {app.appointment_date}
-                      </div>
-                    </td>
-                    <td>
-                      <div className="message-cell" title={app.message}>
-                        {app.message || <span className="text-muted">No description provided</span>}
-                      </div>
-                    </td>
+                    <td className="bold-cell">{app.appointment_date}</td>
+                    <td>{app.appointment_time}</td>
+                    <td>{app.phone}</td>
+                    <td>{app.email}</td>
                     <td>
                       <button className="action-btn delete-btn" onClick={() => handleDeleteAppointment(app.id)} title="Cancel Appointment">
                         <Trash2 size={16} /> Cancel Book
@@ -443,7 +437,7 @@ const Admin = () => {
                 ))}
                 {appointments.length === 0 && (
                   <tr>
-                    <td colSpan="6" className="text-center empty-cell">No appointments scheduled currently.</td>
+                    <td colSpan="8" className="text-center empty-cell">No appointments scheduled currently.</td>
                   </tr>
                 )}
               </tbody>
@@ -531,6 +525,7 @@ const Admin = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          background: linear-gradient(135deg, #ffffff, #f4f9fd);
         }
 
         .admin-title-box {
@@ -551,8 +546,8 @@ const Admin = () => {
         .tabs-container {
           display: flex;
           gap: 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          padding-bottom: 4px;
+          border-bottom: 1px solid rgba(44, 73, 100, 0.08);
+          padding-bottom: 6px;
         }
 
         .tab-btn {
@@ -562,7 +557,7 @@ const Admin = () => {
           font-family: var(--font-title);
           font-weight: 600;
           font-size: 1rem;
-          padding: 10px 20px;
+          padding: 10px 18px;
           cursor: pointer;
           position: relative;
           transition: color 0.2s ease;
@@ -579,12 +574,12 @@ const Admin = () => {
         .tab-btn.active::after {
           content: '';
           position: absolute;
-          bottom: -5px;
+          bottom: -7px;
           left: 0;
           width: 100%;
           height: 2px;
           background: var(--primary);
-          box-shadow: 0 0 8px var(--primary-glow);
+          box-shadow: 0 0 8px rgba(25, 119, 204, 0.18);
         }
 
         .loading-indicator {
@@ -607,11 +602,12 @@ const Admin = () => {
           flex-direction: column;
           gap: 16px;
           transition: all 0.3s ease;
+          background: linear-gradient(135deg, #ffffff, #f4f9fd);
         }
 
         .stat-card-admin:hover {
           transform: translateY(-4px);
-          border-color: var(--border-focus);
+          border-color: var(--primary);
         }
 
         .card-top {
@@ -622,7 +618,7 @@ const Admin = () => {
 
         .count-num {
           font-family: var(--font-title);
-          font-size: 3.5rem;
+          font-size: 3.2rem;
           font-weight: 800;
           line-height: 1;
         }
@@ -634,7 +630,6 @@ const Admin = () => {
           margin-bottom: 20px;
         }
 
-        /* Administrative tables */
         .table-responsive {
           overflow-x: auto;
           border-radius: var(--radius-md);
@@ -648,8 +643,8 @@ const Admin = () => {
         }
 
         .admin-table th {
-          background: rgba(8, 12, 20, 0.4);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          background: #f4f9fd;
+          border-bottom: 1px solid rgba(44, 73, 100, 0.08);
           padding: 16px 20px;
           font-family: var(--font-title);
           font-weight: 600;
@@ -657,14 +652,14 @@ const Admin = () => {
         }
 
         .admin-table td {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(44, 73, 100, 0.06);
           padding: 16px 20px;
           color: var(--text-primary);
           vertical-align: middle;
         }
 
         .admin-table tr:hover {
-          background: rgba(255, 255, 255, 0.01);
+          background: #fbfdff;
         }
 
         .bold-cell {
@@ -700,18 +695,18 @@ const Admin = () => {
         }
 
         .edit-btn {
-          background: rgba(0, 210, 255, 0.1);
+          background: rgba(25, 119, 204, 0.1);
           color: var(--primary);
         }
-        
+
         .edit-btn:hover {
           background: var(--primary);
-          color: #030712;
+          color: #ffffff;
         }
 
         .delete-btn {
-          background: rgba(239, 68, 68, 0.15);
-          color: #f87171;
+          background: rgba(220, 53, 69, 0.1);
+          color: var(--danger);
           display: inline-flex;
           align-items: center;
           gap: 6px;
@@ -720,7 +715,7 @@ const Admin = () => {
         }
 
         .delete-btn:hover {
-          background: #ef4444;
+          background: var(--danger);
           color: white;
         }
 
@@ -729,7 +724,6 @@ const Admin = () => {
           color: var(--text-muted);
         }
 
-        /* Patient and Doctor card cells */
         .patient-details, .doctor-details {
           display: flex;
           flex-direction: column;
@@ -758,8 +752,8 @@ const Admin = () => {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          background: rgba(0, 210, 255, 0.1);
-          border: 1px solid rgba(0, 210, 255, 0.2);
+          background: rgba(25, 119, 204, 0.09);
+          border: 1px solid rgba(25, 119, 204, 0.16);
           color: var(--primary);
           padding: 4px 10px;
           border-radius: 6px;
@@ -775,7 +769,6 @@ const Admin = () => {
           color: var(--text-secondary);
         }
 
-        /* Modal additions */
         .doctor-modal {
           max-width: 480px;
         }
@@ -784,7 +777,7 @@ const Admin = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(44, 73, 100, 0.08);
           padding-bottom: 16px;
           margin-bottom: 20px;
         }
@@ -817,7 +810,7 @@ const Admin = () => {
           display: flex;
           justify-content: flex-end;
           gap: 12px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(44, 73, 100, 0.08);
           padding-top: 20px;
           margin-top: 10px;
         }

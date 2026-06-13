@@ -140,6 +140,7 @@ const Doctors = ({ onSelectDoctor }) => {
           gap: 24px;
           padding: 20px 24px;
           border-radius: var(--radius-md);
+          background: linear-gradient(135deg, #ffffff, #f4f9fd);
         }
 
         .filter-title {
@@ -158,7 +159,7 @@ const Doctors = ({ onSelectDoctor }) => {
         }
 
         .filter-btn {
-          background: rgba(255, 255, 255, 0.03);
+          background: #ffffff;
           border: 1px solid var(--border-light);
           color: var(--text-secondary);
           padding: 8px 16px;
@@ -171,17 +172,16 @@ const Doctors = ({ onSelectDoctor }) => {
         }
 
         .filter-btn:hover {
-          color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.08);
-          border-color: var(--text-muted);
+          color: var(--primary);
+          border-color: var(--primary);
         }
 
         .filter-btn.active {
-          background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-          color: #030712;
+          background: var(--primary);
+          color: #ffffff;
           font-weight: 600;
           border-color: transparent;
-          box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+          box-shadow: 0 8px 20px rgba(25, 119, 204, 0.16);
         }
 
         .loading-state {
@@ -214,7 +214,7 @@ const Doctors = ({ onSelectDoctor }) => {
         }
 
         .error-msg {
-          color: var(--error);
+          color: var(--danger);
           font-weight: 500;
         }
 
@@ -235,8 +235,8 @@ const Doctors = ({ onSelectDoctor }) => {
 
         .doctor-card:hover {
           transform: translateY(-4px);
-          border-color: rgba(0, 210, 255, 0.25);
-          box-shadow: 0 12px 30px rgba(0, 210, 255, 0.08);
+          border-color: rgba(25, 119, 204, 0.2);
+          box-shadow: 0 12px 30px rgba(44, 73, 100, 0.1);
         }
 
         .doctor-avatar-wrapper {
@@ -247,7 +247,7 @@ const Doctors = ({ onSelectDoctor }) => {
           width: 90px;
           height: 90px;
           border-radius: 50%;
-          background: linear-gradient(135deg, rgba(0, 210, 255, 0.1) 0%, rgba(0, 245, 212, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(25, 119, 204, 0.1), rgba(63, 187, 192, 0.12));
           border: 2px solid var(--border-light);
           display: flex;
           align-items: center;
@@ -258,7 +258,6 @@ const Doctors = ({ onSelectDoctor }) => {
 
         .doctor-card:hover .doctor-avatar {
           border-color: var(--primary);
-          box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
           transform: scale(1.05);
         }
 
@@ -267,8 +266,8 @@ const Doctors = ({ onSelectDoctor }) => {
           bottom: -4px;
           left: 50%;
           transform: translateX(-50%);
-          background: rgba(16, 185, 129, 0.15);
-          border: 1px solid rgba(16, 185, 129, 0.3);
+          background: rgba(40, 167, 69, 0.12);
+          border: 1px solid rgba(40, 167, 69, 0.2);
           color: var(--success);
           font-size: 0.75rem;
           font-weight: 600;
@@ -305,7 +304,7 @@ const Doctors = ({ onSelectDoctor }) => {
           gap: 6px;
           margin-top: 8px;
           text-align: left;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(44, 73, 100, 0.08);
           padding-top: 12px;
         }
 
@@ -324,7 +323,7 @@ const Doctors = ({ onSelectDoctor }) => {
         }
 
         .day-badge {
-          background: rgba(255, 255, 255, 0.04);
+          background: #f8fbfe;
           border: 1px solid var(--border-light);
           padding: 2px 8px;
           border-radius: 4px;

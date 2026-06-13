@@ -17,10 +17,21 @@ CREATE TABLE IF NOT EXISTS appointments (
   email VARCHAR(255) NOT NULL,
   doctor_id INTEGER NOT NULL,
   appointment_date VARCHAR(50) NOT NULL,
+  appointment_time VARCHAR(20) NOT NULL,
   message TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
 );
+
+ALTER TABLE appointments
+ADD COLUMN IF NOT EXISTS appointment_time VARCHAR(20);
+
+UPDATE appointments
+SET appointment_time = COALESCE(appointment_time, '09:00 AM')
+WHERE appointment_time IS NULL;
+
+ALTER TABLE appointments
+ALTER COLUMN appointment_time SET NOT NULL;
 
 -- Seed Initial Doctors
 INSERT INTO doctors (name, specialization, available_days) VALUES 

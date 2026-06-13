@@ -21,7 +21,6 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
   return (
     <nav className="navbar-container">
       <div className="navbar-content">
-        {/* Brand/Logo */}
         <div className="brand" onClick={() => handleNavClick('home')}>
           <div className="logo-glow">
             <Activity className="logo-icon" size={24} />
@@ -29,16 +28,16 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
           <span className="brand-text">Med<span className="accent-text">Threads</span> Hospital</span>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="desktop-nav">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentPage === item.id || (item.id === 'admin' && currentPage === 'admin-dashboard');
+            const isCta = item.id === 'appointment';
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`nav-link ${isActive ? 'active' : ''}`}
+                className={`nav-link ${isActive ? 'active' : ''} ${isCta ? 'cta' : ''}`}
               >
                 <Icon size={16} />
                 {item.label}
@@ -47,13 +46,11 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
           })}
         </div>
 
-        {/* Mobile Menu Button */}
         <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="mobile-nav-overlay fade-in">
           <div className="mobile-nav">
@@ -75,27 +72,26 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
         </div>
       )}
 
-      {/* Styled inline for custom navbar elements to maintain css structure */}
       <style>{`
         .navbar-container {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          height: 70px;
-          background: rgba(8, 12, 20, 0.75);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          height: 76px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(14px);
+          border-bottom: 1px solid var(--border-light);
           z-index: 1000;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 6px 24px rgba(25, 119, 204, 0.06);
         }
 
         .navbar-content {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1200px;
           padding: 0 24px;
           display: flex;
           justify-content: space-between;
@@ -110,34 +106,34 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
         }
 
         .logo-glow {
-          background: linear-gradient(135deg, #00d2ff, #00f5d4);
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
           padding: 8px;
           border-radius: 50%;
-          box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 8px 20px rgba(25, 119, 204, 0.14);
         }
 
         .logo-icon {
-          color: #080c14;
+          color: #ffffff;
         }
 
         .brand-text {
-          font-family: 'Outfit', sans-serif;
-          font-size: 1.3rem;
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-family: var(--font-title);
+          font-size: 1.16rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: var(--text-primary);
         }
 
         .accent-text {
-          background: linear-gradient(135deg, #00d2ff, #00f5d4);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: var(--primary);
         }
 
         .desktop-nav {
           display: flex;
+          align-items: center;
           gap: 8px;
         }
 
@@ -148,25 +144,36 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
           background: transparent;
           border: none;
           color: var(--text-secondary);
-          font-family: 'Outfit', sans-serif;
+          font-family: var(--font-title);
           font-weight: 500;
           font-size: 0.95rem;
-          padding: 8px 16px;
-          border-radius: 8px;
+          padding: 8px 12px;
+          border-radius: 999px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all var(--transition-fast);
         }
 
         .nav-link:hover {
-          color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.04);
+          color: var(--primary);
+          background: rgba(25, 119, 204, 0.06);
         }
 
         .nav-link.active {
-          color: #030712;
-          background: linear-gradient(135deg, #00d2ff, #00f5d4);
-          box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+          color: var(--primary);
+          background: rgba(25, 119, 204, 0.08);
           font-weight: 600;
+        }
+
+        .nav-link.cta {
+          background: var(--primary);
+          color: #ffffff;
+          padding: 9px 16px;
+          box-shadow: 0 8px 20px rgba(25, 119, 204, 0.14);
+        }
+
+        .nav-link.cta:hover {
+          background: var(--primary-hover);
+          color: #fff;
         }
 
         .mobile-menu-btn {
@@ -179,12 +186,11 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
 
         .mobile-nav-overlay {
           position: fixed;
-          top: 70px;
+          top: 76px;
           left: 0;
           width: 100%;
-          height: calc(100vh - 70px);
-          background: rgba(8, 12, 20, 0.95);
-          backdrop-filter: blur(10px);
+          height: calc(100vh - 76px);
+          background: rgba(255, 255, 255, 0.96);
           z-index: 999;
           display: flex;
           flex-direction: column;
@@ -194,43 +200,43 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
         .mobile-nav {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 12px;
         }
 
         .mobile-nav-link {
           display: flex;
           align-items: center;
           gap: 12px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: #ffffff;
+          border: 1px solid var(--border-light);
           color: var(--text-secondary);
-          font-family: 'Outfit', sans-serif;
-          font-size: 1.1rem;
+          font-family: var(--font-title);
+          font-size: 1rem;
           font-weight: 500;
-          padding: 16px;
+          padding: 14px 16px;
           border-radius: 12px;
           cursor: pointer;
           width: 100%;
           text-align: left;
-          transition: all 0.2s ease;
+          transition: all var(--transition-fast);
         }
 
         .mobile-nav-link:hover {
-          color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.08);
+          color: var(--primary);
+          border-color: var(--primary);
         }
 
         .mobile-nav-link.active {
-          color: #030712;
-          background: linear-gradient(135deg, #00d2ff, #00f5d4);
-          font-weight: 600;
-          box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
+          color: var(--primary);
+          background: rgba(25, 119, 204, 0.08);
+          border-color: rgba(25, 119, 204, 0.2);
         }
 
         @media (max-width: 768px) {
           .desktop-nav {
             display: none;
           }
+
           .mobile-menu-btn {
             display: block;
           }
