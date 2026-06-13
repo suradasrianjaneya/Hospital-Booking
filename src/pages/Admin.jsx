@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { 
-  Users, Calendar, LogIn, LogOut, Plus, Trash2, Edit, Save, X, 
-  LayoutDashboard, UserCheck, Stethoscope, Mail, Phone, Clock, FileText 
+import {
+  Calendar, LogIn, LogOut, Plus, Trash2, Edit, Save, X,
+  LayoutDashboard, Stethoscope, Mail, Phone, Clock
 } from 'lucide-react';
 
 const Admin = () => {
@@ -400,40 +400,34 @@ const Admin = () => {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Patient Details</th>
-                  <th>Consulting Doctor</th>
-                  <th>Scheduled Date</th>
-                  <th>Message / Problem</th>
+                  <th>Patient Name</th>
+                  <th>Doctor Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Phone</th>
+                  <th>Email</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {appointments.map(app => (
+                {[...appointments].sort((a, b) => {
+                  const dateCompare = new Date(a.appointment_date) - new Date(b.appointment_date);
+                  if (dateCompare !== 0) return dateCompare;
+                  return (a.appointment_time || '').localeCompare(b.appointment_time || '');
+                }).map(app => (
                   <tr key={app.id}>
                     <td>#{app.id}</td>
-                    <td>
-                      <div className="patient-details">
-                        <span className="patient-name">{app.patient_name}</span>
-                        <span className="patient-contact"><Phone size={10} /> {app.phone}</span>
-                        <span className="patient-contact"><Mail size={10} /> {app.email}</span>
-                      </div>
-                    </td>
+                    <td className="bold-cell">{app.patient_name}</td>
                     <td>
                       <div className="doctor-details">
                         <span className="doc-name">{app.doctor_name}</span>
                         <span className="doc-spec">{app.doctor_specialization}</span>
                       </div>
                     </td>
-                    <td className="bold-cell">
-                      <div className="date-badge-admin">
-                        <Clock size={12} /> {app.appointment_date}
-                      </div>
-                    </td>
-                    <td>
-                      <div className="message-cell" title={app.message}>
-                        {app.message || <span className="text-muted">No description provided</span>}
-                      </div>
-                    </td>
+                    <td className="bold-cell">{app.appointment_date}</td>
+                    <td>{app.appointment_time}</td>
+                    <td>{app.phone}</td>
+                    <td>{app.email}</td>
                     <td>
                       <button className="action-btn delete-btn" onClick={() => handleDeleteAppointment(app.id)} title="Cancel Appointment">
                         <Trash2 size={16} /> Cancel Book
@@ -443,7 +437,7 @@ const Admin = () => {
                 ))}
                 {appointments.length === 0 && (
                   <tr>
-                    <td colSpan="6" className="text-center empty-cell">No appointments scheduled currently.</td>
+                    <td colSpan="8" className="text-center empty-cell">No appointments scheduled currently.</td>
                   </tr>
                 )}
               </tbody>

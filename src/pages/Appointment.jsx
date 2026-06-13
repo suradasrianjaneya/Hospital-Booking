@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Calendar, User, Phone, Mail, FileText, CheckCircle, ArrowRight, Loader, AlertTriangle } from 'lucide-react';
 
+const DEFAULT_SLOTS = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM'];
+
 const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
@@ -16,6 +18,10 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
   const [submitting, setSubmitting] = useState(false);
   const [validationError, setValidationError] = useState(null);
   const [successBooking, setSuccessBooking] = useState(null);
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState('');
+  const [slotMessage, setSlotMessage] = useState(null);
 
   // Fetch doctors list for dropdown on load
   useEffect(() => {
@@ -44,6 +50,51 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
     fetchDoctors();
   }, [preselectedDoctorId, clearPreselectedDoctor]);
 
+  useEffect(() => {
+    const fetchAvailableSlots = async () => {
+      if (!formData.doctor_id || !formData.appointment_date) {
+        setAvailableSlots([]);
+        setSelectedSlot('');
+        setSlotMessage(null);
+        return;
+      }
+
+      const doctorId = Number(formData.doctor_id);
+      const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+      if (!datePattern.test(formData.appointment_date)) {
+        setAvailableSlots([]);
+        setSelectedSlot('');
+        setSlotMessage('Please choose a valid appointment date.');
+        return;
+      }
+
+      try {
+        setLoadingSlots(true);
+        setSlotMessage(null);
+        setSelectedSlot('');
+
+        const res = await fetch(`/api/doctors/${doctorId}/available-slots?date=${encodeURIComponent(formData.appointment_date)}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Unable to load available time slots.');
+        }
+
+        setAvailableSlots(data.availableSlots || []);
+        if ((data.availableSlots || []).length === 0) {
+          setSlotMessage('No time slots remain for this doctor on the selected date.');
+        }
+      } catch (err) {
+        setAvailableSlots([]);
+        setSlotMessage(err.message);
+      } finally {
+        setLoadingSlots(false);
+      }
+    };
+
+    fetchAvailableSlots();
+  }, [formData.doctor_id, formData.appointment_date]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -63,6 +114,7 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
     if (!email.trim()) return setValidationError('Email address is required');
     if (!doctor_id) return setValidationError('Please select a doctor');
     if (!appointment_date) return setValidationError('Appointment date is required');
+    if (!selectedSlot) return setValidationError('Please choose an available time slot');
 
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,7 +129,8 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          doctor_id: Number(formData.doctor_id)
+          doctor_id: Number(formData.doctor_id),
+          appointment_time: selectedSlot
         })
       });
 
@@ -91,9 +144,10 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
       setSuccessBooking({
         id: data.appointmentId,
         patientName: formData.patient_name,
-        doctorName: selectedDoctor.name,
-        specialization: selectedDoctor.specialization,
-        date: formData.appointment_date
+        doctorName: selectedDoctor?.name || 'Selected doctor',
+        specialization: selectedDoctor?.specialization || '',
+        date: formData.appointment_date,
+        time: selectedSlot
       });
 
       // Clear form
@@ -105,6 +159,9 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         appointment_date: '',
         message: ''
       });
+      setSelectedSlot('');
+      setAvailableSlots([]);
+      setSlotMessage(null);
     } catch (err) {
       setValidationError(err.message);
     } finally {
@@ -219,6 +276,35 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
             </div>
 
             <div className="form-group">
+              <label className="form-label">Available Time Slots *</label>
+              {loadingSlots ? (
+                <div className="slot-loading">
+                  <Loader size={16} className="spinner" /> Loading available slots...
+                </div>
+              ) : (
+                <>
+                  <div className="slot-grid">
+                    {DEFAULT_SLOTS.map((slot) => {
+                      const isAvailable = availableSlots.includes(slot);
+                      return (
+                        <button
+                          key={slot}
+                          type="button"
+                          className={`slot-pill ${selectedSlot === slot ? 'active' : ''} ${!isAvailable ? 'disabled' : ''}`}
+                          disabled={submitting || !isAvailable}
+                          onClick={() => setSelectedSlot(slot)}
+                        >
+                          {slot}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {slotMessage && <p className="slot-message">{slotMessage}</p>}
+                </>
+              )}
+            </div>
+
+            <div className="form-group">
               <label className="form-label" htmlFor="message">
                 <FileText size={14} /> Description of Health Issues / Message
               </label>
@@ -321,6 +407,10 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
                   <span className="sum-label">Scheduled Date:</span>
                   <span className="sum-value">{successBooking.date}</span>
                 </div>
+                <div className="summary-row">
+                  <span className="sum-label">Scheduled Time:</span>
+                  <span className="sum-value">{successBooking.time}</span>
+                </div>
               </div>
               
               <p className="notice-sub">A reminder email has been sent to your registered address.</p>
@@ -399,6 +489,48 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
           background: rgba(239, 68, 68, 0.15);
           border: 1px solid rgba(239, 68, 68, 0.25);
           color: #f87171;
+        }
+
+        .slot-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 8px;
+        }
+
+        .slot-pill {
+          border: 1px solid rgba(0, 210, 255, 0.2);
+          background: rgba(255, 255, 255, 0.03);
+          color: var(--text-primary);
+          border-radius: 999px;
+          padding: 10px 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .slot-pill:hover:not(:disabled) {
+          transform: translateY(-1px);
+          border-color: var(--primary);
+          box-shadow: 0 8px 20px rgba(0, 210, 255, 0.12);
+        }
+
+        .slot-pill.active {
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          color: #03111d;
+          border-color: transparent;
+        }
+
+        .slot-pill.disabled {
+          cursor: not-allowed;
+          opacity: 0.45;
+        }
+
+        .slot-loading,
+        .slot-message {
+          margin-top: 8px;
+          color: var(--text-secondary);
+          font-size: 0.9rem;
         }
 
         /* Schedule Panel Styles */
@@ -610,6 +742,10 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
         @media (max-width: 600px) {
           .form-grid {
             grid-template-columns: 1fr;
+          }
+
+          .slot-grid {
+            grid-template-columns: 1fr 1fr;
           }
         }
       `}</style>
