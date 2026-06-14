@@ -429,7 +429,7 @@ const Admin = () => {
                     <td>{app.phone}</td>
                     <td>{app.email}</td>
                     <td>
-                      <button className="action-btn delete-btn" onClick={() => handleDeleteAppointment(app.id)} title="Cancel Appointment">
+                      <button className="cancel-appointment-btn" onClick={() => handleDeleteAppointment(app.id)} title="Cancel Appointment">
                         <Trash2 size={16} /> Cancel Book
                       </button>
                     </td>
@@ -719,6 +719,27 @@ const Admin = () => {
           color: white;
         }
 
+        .cancel-appointment-btn {
+          background: rgba(220, 53, 69, 0.1);
+          color: var(--danger);
+          border: 1px solid rgba(220, 53, 69, 0.15);
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 14px;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .cancel-appointment-btn:hover {
+          background: var(--danger);
+          color: white;
+        }
+
         .empty-cell {
           padding: 40px !important;
           color: var(--text-muted);
@@ -771,6 +792,10 @@ const Admin = () => {
 
         .doctor-modal {
           max-width: 480px;
+          width: 100%;
+          padding: 35px;
+          background: #ffffff;
+          box-shadow: 0 20px 52px rgba(25, 119, 204, 0.15);
         }
 
         .modal-header {
