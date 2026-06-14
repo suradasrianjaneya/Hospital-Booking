@@ -109,7 +109,36 @@ const Appointment = ({ preselectedDoctorId, clearPreselectedDoctor }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    let finalValue = value;
+
+    if (name === 'appointment_date' && value) {
+      const dateParts = value.split(/[-/]/);
+      if (dateParts.length === 3) {
+        if (dateParts[2].length === 4) {
+          const year = dateParts[2];
+          const part1 = dateParts[0].padStart(2, '0');
+          const part2 = dateParts[1].padStart(2, '0');
+          const val1 = parseInt(part1, 10);
+          const val2 = parseInt(part2, 10);
+
+          if (val1 > 12) {
+            // First part is day, second is month (DD-MM-YYYY)
+            finalValue = `${year}-${part2}-${part1}`;
+          } else if (val2 > 12) {
+            // First part is month, second is day (MM-DD-YYYY)
+            finalValue = `${year}-${part1}-${part2}`;
+          } else {
+            // Ambiguous (both <= 12). Default to DD-MM-YYYY -> YYYY-MM-DD
+            finalValue = `${year}-${part2}-${part1}`;
+          }
+        } else if (dateParts[0].length === 4) {
+          // Keep YYYY-MM-DD clean with padded month and day
+          finalValue = `${dateParts[0]}-${dateParts[1].padStart(2, '0')}-${dateParts[2].padStart(2, '0')}`;
+        }
+      }
+    }
+
+    setFormData(prev => ({ ...prev, [name]: finalValue }));
     setValidationError(null);
   };
 
