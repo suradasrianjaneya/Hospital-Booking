@@ -75,7 +75,7 @@ The SQLite engine initializes the database inside `hospital.db`. Two primary rel
 3. **Start Development Environment**:
    Run both the Express server API and Vite dev server simultaneously:
    ```bash
-   npm run dev:all
+   npm run dev
    ```
    * The frontend application will load at: `http://localhost:5173`
    * The API server will run at: `http://localhost:5000`
