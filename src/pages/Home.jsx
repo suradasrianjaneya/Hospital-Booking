@@ -39,7 +39,7 @@ const Home = ({ setCurrentPage }) => {
   return (
     <div className="home-container fade-in">
       <div className="hero-shell">
-       
+
 
         <section
           className="hero-section"
@@ -144,9 +144,9 @@ const Home = ({ setCurrentPage }) => {
             <div className="feature-card-icon">
               <ShieldCheck size={48} />
             </div>
-            <span className="feature-card-label">Our Philosophy</span>
-            <h3>Excellence in Modern Healthcare</h3>
-            <p>We are dedicated to providing world-class medical services with a personalized touch. Our advanced facilities and team of expert specialists ensure you receive the finest treatment possible.</p>
+            <span className="feature-card-label">Welcome to MedThreads India</span>
+            <h3>Compassionate care for every step of your health journey.</h3>
+            <p>From preventive screenings to specialized treatment, our medical team delivers trusted, patient-first care in a calm and welcoming environment.</p>
             <button className="feature-btn" onClick={() => setCurrentPage('appointment')}>
               Book Appointment <ChevronRight size={18} />
             </button>
@@ -625,26 +625,8 @@ const Home = ({ setCurrentPage }) => {
 
           .hero-section {
             min-height: auto;
-            padding: 24px 16px;
-            border-radius: 20px;
-          }
-
-          .hero-overlay {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 100%);
-          }
-
-          .hero-container {
-            padding: 0;
-            gap: 20px;
-          }
-
-          .hero-title {
-            font-size: 32px;
-          }
-
-          .hero-description {
-            font-size: 16px;
-            margin-bottom: 20px;
+            padding: 40px 22px;
+            border-radius: 24px;
           }
 
           .hero-actions {
@@ -657,52 +639,7 @@ const Home = ({ setCurrentPage }) => {
           }
 
           .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 100%;
-          }
-
-          .hero-stats > div {
-            min-width: 0;
-            padding: 10px 8px;
-            text-align: center;
-          }
-
-          .hero-stats strong {
-            font-size: 1.1rem;
-          }
-
-          .hero-stats span {
-            font-size: 0.75rem;
-          }
-
-          .hero-floating-cards {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-
-          .hero-card {
-            padding: 16px;
-          }
-
-          .hero-card h3 {
-            font-size: 0.95rem;
-          }
-
-          .hero-card p {
-            font-size: 0.85rem;
-          }
-
-          .hero-avatar {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-          }
-
-          .mini-icon {
-            width: 32px;
-            height: 32px;
+            flex-direction: column;
           }
 
           .hero-card-small.alt {
@@ -711,38 +648,10 @@ const Home = ({ setCurrentPage }) => {
 
           .why-choose-grid {
             grid-template-columns: 1fr;
-            gap: 16px;
           }
 
           .feature-card {
-            padding: 24px 20px;
             min-height: auto;
-            gap: 10px;
-          }
-
-          .feature-card-primary {
-            padding: 28px 20px;
-          }
-
-          .feature-card h3 {
-            font-size: 1.15rem;
-          }
-
-          .feature-card-primary h3 {
-            font-size: 1.35rem;
-          }
-
-          .service-card {
-            padding: 20px;
-            gap: 10px;
-          }
-
-          .service-card h3 {
-            font-size: 1.1rem;
-          }
-
-          .service-card p {
-            font-size: 0.9rem;
           }
         }
       `}</style>

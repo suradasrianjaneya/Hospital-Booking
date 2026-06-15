@@ -125,7 +125,6 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
           font-weight: 700;
           letter-spacing: -0.02em;
           color: var(--text-primary);
-          white-space: nowrap;
         }
 
         .accent-text {
@@ -240,19 +239,6 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
 
           .mobile-menu-btn {
             display: block;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .brand-text {
-            font-size: 1.02rem;
-          }
-          .navbar-content {
-            padding: 0 16px;
-          }
-          .logo-glow {
-            padding: 6px;
-            box-shadow: 0 4px 12px rgba(25, 119, 204, 0.1);
           }
         }
       `}</style>
